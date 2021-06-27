@@ -1,0 +1,20 @@
+{
+  "name": "my-json-parser",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Horace Lee",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "test": "ts-node node_modules/tape/bin/tape tests/**/*.ts | tap-spec"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^15.12.2",
+    "@types/tape": "^4.13.0",
+    "tap-spec": "^5.0.0",
+    "tape": "^5.2.2",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.3"
+  }
+}
