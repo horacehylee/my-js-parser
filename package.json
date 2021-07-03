@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "test": "ts-node node_modules/tape/bin/tape tests/**/*.ts | tap-spec"
+    "test": "ts-node node_modules/tape/bin/tape tests/**/*.spec.ts | tap-spec"
   },
   "dependencies": {},
   "devDependencies": {
