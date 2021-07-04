@@ -125,28 +125,34 @@ export const json: Record<string, Parser<any>> = {
   }),
 
   array: lazy(() => {
+    const leftBracket = literal("[");
+    const rightBracket = literal("[");
+
     const emptyArray: Parser<any[]> = pipe<any[]>([
-      literal("["),
+      leftBracket,
       json.whitespace,
-      literal("]"),
+      rightBracket,
     ])(() => lift([]));
 
     const nonEmptyArray: Parser<any[]> = pipe<any[]>([
-      literal("["),
+      leftBracket,
       pipe<any[]>([json.value, first([literal(","), lift("")])])(([v]) =>
         lift(v)
       ).some(),
-      literal("]"),
+      rightBracket,
     ])(([, arr]) => lift(arr));
 
     return first([emptyArray, nonEmptyArray]);
   }),
 
   object: lazy(() => {
+    const leftBrace = literal("{");
+    const rightBrace = literal("}");
+
     const emptyObject: Parser<Object> = pipe<Object>([
-      literal("{"),
+      leftBrace,
       json.whitespace,
-      literal("}"),
+      rightBrace,
     ])(() => lift({}));
 
     const pair: Parser<[string, any]> = pipe<[string, any]>([
@@ -160,11 +166,11 @@ export const json: Record<string, Parser<any>> = {
     });
 
     const nonEmptyObject: Parser<Object> = pipe<Object>([
-      literal("{"),
+      leftBrace,
       pipe<[string, any][]>([pair, first([literal(","), lift("")])])(([p]) =>
         lift(p)
       ).some(),
-      literal("}"),
+      rightBrace,
     ])(([, ps]) => {
       const pairs: [string, any][] = ps;
       const obj: any = {};
